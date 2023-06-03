@@ -1,15 +1,9 @@
-import {
-	Text,
-	StyleSheet,
-	View,
-	TextInput,
-	TouchableOpacity,
-} from "react-native";
+import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
 
-export function Participantes() {
+export function Participantes({ name }) {
 	return (
 		<View style={styles.container}>
-			<Text style={styles.name}> MINHA VIDA </Text>
+			<Text style={styles.name}> {name} </Text>
 			<TouchableOpacity style={styles.button} activeOpacity={0.7}>
 				<Text style={styles.buttonText}> - </Text>
 			</TouchableOpacity>
