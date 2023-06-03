@@ -5,14 +5,11 @@ import {
 	TextInput,
 	TouchableOpacity,
 } from "react-native";
+import { Participantes } from "../components/Participantes";
 
 export function Home() {
 	function handleParticipanteAdd() {
-		console.log("Nossa função está funcionando");
-	}
-
-	function handleParticipanteDelete() {
-		console.log("Nossa função está funcionando deletando");
+		console.log("A função está funcionando");
 	}
 
 	return (
@@ -34,20 +31,7 @@ export function Home() {
 				</TouchableOpacity>
 			</View>
 
-			<Text style={styles.titleEvent}>Participantes</Text>
-			<View style={styles.form}>
-				<TextInput
-					style={styles.input}
-					placeholder=''
-					placeholderTextColor={"#6b6b6b"}
-				/>
-				<TouchableOpacity
-					style={styles.redButton}
-					onPress={handleParticipanteDelete}
-					activeOpacity={0.7}>
-					<Text style={styles.deleteButton}> - </Text>
-				</TouchableOpacity>
-			</View>
+			<Participantes />
 		</View>
 	);
 }
@@ -93,18 +77,6 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	addButton: {
-		color: "#fff",
-		fontSize: 24,
-	},
-	redButton: {
-		width: 56,
-		height: 56,
-		borderRadius: 5,
-		backgroundColor: "#E23C44",
-		alignItems: "center",
-		justifyContent: "center",
-	},
-	deleteButton: {
 		color: "#fff",
 		fontSize: 24,
 	},
