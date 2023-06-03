@@ -12,7 +12,7 @@ export function Home() {
 	}
 
 	function handleParticipanteDelete() {
-		console.log("Nossa função está funcionando");
+		console.log("Nossa função está funcionando deletando");
 	}
 
 	return (
@@ -36,6 +36,11 @@ export function Home() {
 
 			<Text style={styles.titleEvent}>Participantes</Text>
 			<View style={styles.form}>
+				<TextInput
+					style={styles.input}
+					placeholder=''
+					placeholderTextColor={"#6b6b6b"}
+				/>
 				<TouchableOpacity
 					style={styles.redButton}
 					onPress={handleParticipanteDelete}
