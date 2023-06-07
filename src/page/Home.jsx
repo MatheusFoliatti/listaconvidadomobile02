@@ -20,21 +20,22 @@ export function Home() {
 			<View style={styles.form}>
 				<TextInput
 					style={styles.input}
-					placeholder='Nome do participante...'
+					placeholder="Nome do participante..."
 					placeholderTextColor={"#6b6b6b"}
 				/>
 				<TouchableOpacity
 					style={styles.button}
 					onPress={handleParticipanteAdd}
-					activeOpacity={0.7}>
+					activeOpacity={0.7}
+				>
 					<Text style={styles.addButton}> + </Text>
 				</TouchableOpacity>
 			</View>
 
-			<Participantes name='Sextou!!!!' />
-			<Participantes name='Sabadou!!!' />
-			<Participantes name='Domingou!!!' />
-			<Participantes name='Segundou :(' />
+			<Participantes name="Sextou!!!!" />
+			<Participantes name="Sabadou!!!" />
+			<Participantes name="Domingou!!!" />
+			<Participantes name="Segundou :(" />
 		</View>
 	);
 }
