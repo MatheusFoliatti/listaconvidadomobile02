@@ -6,10 +6,28 @@ import {
     TouchableOpacity,
 } from 'react-native'
 import { Participantes } from '../components/Participantes'
+import { useState } from 'react'
 
 export function Home() {
+    /**
+     * Estrutura basica do useState
+     * const [1param, 2param] = useState()
+     */
+
+    const [listParticipant, setListParticipant] = useState([
+        'Fulane',
+        'João',
+        'Maria',
+        'Ana',
+        'Onix',
+    ])
+
     function handleParticipanteAdd() {
         console.log('A função está funcionando')
+    }
+
+    function handleParticipantRemove(name) {
+        console.log(`Vou remover ${name}`)
     }
 
     return (
@@ -32,10 +50,22 @@ export function Home() {
                 </TouchableOpacity>
             </View>
 
-            <Participantes name="Fulano" />
-            <Participantes name="João" />
-            <Participantes name="Paulo" />
-            <Participantes name="Maria" />
+            <Participantes
+                name="Fulano"
+                participantRemove={() => handleParticipantRemove('Fulano')}
+            />
+            <Participantes
+                name="João"
+                participantRemove={() => handleParticipantRemove('João')}
+            />
+            <Participantes
+                name="Paulo"
+                participantRemove={() => handleParticipantRemove('Ana')}
+            />
+            <Participantes
+                name="Maria"
+                participantRemove={() => handleParticipantRemove('Maria')}
+            />
         </View>
     )
 }

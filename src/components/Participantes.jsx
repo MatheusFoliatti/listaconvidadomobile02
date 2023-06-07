@@ -1,10 +1,14 @@
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native'
 
-export function Participantes({ name }) {
+export function Participantes({ name, participantRemove }) {
     return (
         <View style={styles.container}>
             <Text style={styles.name}> {name} </Text>
-            <TouchableOpacity style={styles.button} activeOpacity={0.7}>
+            <TouchableOpacity
+                style={styles.button}
+                activeOpacity={0.7}
+                onPress={participantRemove}
+            >
                 <Text style={styles.buttonText}> - </Text>
             </TouchableOpacity>
         </View>
