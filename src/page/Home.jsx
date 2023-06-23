@@ -1,117 +1,140 @@
 import {
-    View,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-} from 'react-native'
-import { Participantes } from '../components/Participantes'
-import { useState } from 'react'
+  Alert,
+  FlatList,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
+} from "react-native";
+
+import { useState } from "react";
+
+import { Participant } from "../components/Participant";
 
 export function Home() {
-    /**
-     * Estrutura basica do useState
-     * const [1param, 2param] = useState()
-     */
+  /**
+   * Estrutura básica do useSate
+   * const [1param, 2param] = useState()
+   */
 
-    const [listParticipant, setListParticipant] = useState([
-        'Fulane',
-        'João',
-        'Maria',
-        'Ana',
-        'Onix',
-    ])
+  const [nameParticipant, setNameParticipant] = useState('')
 
-    function handleParticipanteAdd() {
-        console.log('A função está funcionando')
+  const [listParticipant, setListParticipant] = useState(["Fulane"])
+
+
+  function handleParticipantAdd(participant) {
+
+    if (listParticipant.includes(participant.trim())) {
+      Alert.alert('Ohhhh.... Mané esse nené, já está na lista!!!')
+    } else {
+      // const str2 = str.charAt(0).toUpperCase() + str.slice(1);
+      setListParticipant((prevState) => [...prevState, participant.charAt(0).toUpperCase() + participant.slice(1)]);
     }
+  }
 
-    function handleParticipantRemove(name) {
-        console.log(`Vou remover ${name}`)
-    }
+  function handleParticipantRemove(participant) {
+    Alert.alert("Remover", `Remover o participante ${participant}`, [
+      {
+        text: 'sim',
+        onPress: () => Alert.alert('Eliminado!!')
+      }, {
+        text: 'não',
+        onPress: () => Alert.alert('Mudei de Ideia')
+      }])
+  }
 
-    return (
-        <View style={styles.container}>
-            <Text style={styles.titleEvent}> Nome do evento </Text>
-            <Text style={styles.dateEvent}> Sexta, 2 de Junho de 2023 </Text>
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titleEvent}>Nome do Evento</Text>
+      <Text style={styles.dateEvent}>Sexta, 2 de junho de 2023</Text>
 
-            <View style={styles.form}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Nome do participante..."
-                    placeholderTextColor={'#6b6b6b'}
-                />
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={handleParticipanteAdd}
-                    activeOpacity={0.7}
-                >
-                    <Text style={styles.addButton}> + </Text>
-                </TouchableOpacity>
-            </View>
+      <View style={styles.form}>
+        <TextInput
+          style={styles.input}
+          placeholder="Nome do participante..."
+          placeholderTextColor={"#6b6b6b"}
+          onChangeText={setNameParticipant}
+          value={nameParticipant}
+        />
 
-            <Participantes
-                name="Fulano"
-                participantRemove={() => handleParticipantRemove('Fulano')}
-            />
-            <Participantes
-                name="João"
-                participantRemove={() => handleParticipantRemove('João')}
-            />
-            <Participantes
-                name="Paulo"
-                participantRemove={() => handleParticipantRemove('Ana')}
-            />
-            <Participantes
-                name="Maria"
-                participantRemove={() => handleParticipantRemove('Maria')}
-            />
-        </View>
-    )
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.button}
+          onPress={() => handleParticipantAdd(nameParticipant)}
+        >
+          <Text style={styles.buttonText}>+</Text>
+        </TouchableOpacity>
+      </View>
+
+      <FlatList
+        data={listParticipant}
+        keyExtractor={(item) => item}
+        renderItem={({ item }) => (
+          <Participant
+            key={item}
+            name={item}
+            participantRemove={() => handleParticipantRemove(item)}
+          />
+        )}
+        showsVerticalScrollIndicator={false}
+        ListEmptyComponent={() => {
+          <Text style={styles.listEmptyText}>
+            Ninguém chegou no evento ainda? Adicione participante a sua lista de presença.
+          </Text>
+        }}
+      />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#131016',
-        padding: 24,
-    },
-    titleEvent: {
-        color: '#fdfcfe',
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginTop: 48,
-    },
-    dateEvent: {
-        color: '#6b6b6b',
-        fontSize: 16,
-    },
-    form: {
-        width: '100%',
-        flexDirection: 'row',
-        marginTop: 36,
-        marginBottom: 42,
-        gap: 7,
-    },
-    input: {
-        flex: 1,
-        height: 56,
-        backgroundColor: '#1f1e25',
-        borderRadius: 5,
-        color: '#fff',
-        padding: 16,
-        fontSize: 16,
-    },
-    button: {
-        width: 56,
-        height: 56,
-        borderRadius: 5,
-        backgroundColor: '#31cf65',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    addButton: {
-        color: '#fff',
-        fontSize: 24,
-    },
-})
+  container: {
+    flex: 1,
+    backgroundColor: "#131016",
+    padding: 24,
+  },
+  titleEvent: {
+    color: "#fdfcfe",
+    fontSize: 24,
+    fontWeight: "bold",
+    marginTop: 48,
+  },
+  dateEvent: {
+    color: "#6b6b6b",
+    fontSize: 16,
+  },
+  form: {
+    width: "100%",
+    flexDirection: "row",
+    marginTop: 36,
+    marginBottom: 42,
+    gap: 7,
+  },
+  input: {
+    flex: 1,
+    height: 56,
+    backgroundColor: "#1f1e25",
+    borderRadius: 5,
+    color: "#fff",
+    padding: 16,
+    fontSize: 16,
+  },
+  button: {
+    width: 56,
+    height: 56,
+    borderRadius: 5,
+    backgroundColor: "#31cf67",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 24,
+  },
+  listEmptyText: {
+    color: '#fff',
+    fontSize: 14,
+    textAlign: 'center'
+  }
+});
