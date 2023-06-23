@@ -38,7 +38,13 @@ export function Home() {
         Alert.alert('Remover', `Remover o participante ${participant}`, [
             {
                 text: 'sim',
-                onPress: () => Alert.alert('Eliminado!!'),
+                onPress: () => {
+                    setListParticipant((prevState) =>
+                        prevState.filter(
+                            (participantName) => participantName !== participant
+                        )
+                    )
+                },
             },
             {
                 text: 'não',
